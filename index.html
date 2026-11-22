@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f68b1f">
+  <title>VoltEdge Electricals | Online Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="top-strip">
+    Quality electrical materials · Retail and wholesale available
+  </div>
+
+  <header class="header">
+    <div class="header-main">
+      <a href="#" class="logo" onclick="showPage('home')">
+        <span class="logo-icon">V</span>
+        <span>Volt<span>Edge</span><small>ELECTRICALS</small></span>
+      </a>
+
+      <form class="search-box" id="searchForm">
+        <input id="searchInput" type="search" placeholder="Search for cables, bulbs, sockets..." aria-label="Search products">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="header-link" onclick="showPage('home')">Home</button>
+        <button class="cart-button" onclick="showPage('cart')">
+          🛒 Cart <span id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="category-nav">
+      <button onclick="filterCategory('All')">All Products</button>
+      <button onclick="filterCategory('Lighting')">Lighting</button>
+      <button onclick="filterCategory('Wiring')">Wiring & Cables</button>
+      <button onclick="filterCategory('Accessories')">Accessories</button>
+      <button onclick="filterCategory('Protection')">Protection</button>
+      <button onclick="showPage('wholesale')">Wholesale</button>
+    </nav>
+  </header>
+
+  <main id="homePage" class="page">
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow">WELCOME TO VOLTEDGE</span>
+        <h1>Powering every connection.</h1>
+        <p>Shop quality electrical materials for your home, business and next big project.</p>
+        <button class="primary-button" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Shop products →</button>
+        <div class="hero-note">Retail prices · Bulk supply · Quality materials</div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1000&q=85" alt="Electrical power lines">
+      </div>
+    </section>
+
+    <section class="benefits container">
+      <div>🚚 <span><b>Convenient shopping</b><small>Shop from anywhere</small></span></div>
+      <div>⚡ <span><b>Quality products</b><small>Electrical essentials</small></span></div>
+      <div>📦 <span><b>Bulk enquiries</b><small>For contractors and businesses</small></span></div>
+      <div>🛍️ <span><b>Easy checkout</b><small>Simple shopping experience</small></span></div>
+    </section>
+
+    <section class="container section">
+      <div class="section-heading">
+        <div><span class="eyebrow">FIND WHAT YOU NEED</span><h2>Shop by category</h2></div>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" onclick="filterCategory('Lighting')"><span>💡</span><b>Lighting</b><small>Bulbs and fixtures</small></button>
+        <button class="category-card" onclick="filterCategory('Wiring')"><span>🔌</span><b>Wiring & Cables</b><small>Wires and conduits</small></button>
+        <button class="category-card" onclick="filterCategory('Accessories')"><span>🔧</span><b>Accessories</b><small>Sockets and switches</small></button>
+        <button class="category-card" onclick="filterCategory('Protection')"><span>🛡️</span><b>Protection</b><small>Breakers and safety</small></button>
+      </div>
+    </section>
+
+    <section class="deal-banner container">
+      <div><span class="eyebrow">VOLTEDGE PICKS</span><h2>Get your next project powered.</h2><p>Explore electrical essentials in one place.</p></div>
+      <button class="light-button" onclick="document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})">Explore store</button>
+    </section>
+
+    <section class="container section" id="productsSection">
+      <div class="section-heading">
+        <div><span class="eyebrow">OUR STORE</span><h2 id="productHeading">Popular products</h2></div>
+        <select id="sortSelect" aria-label="Sort products">
+          <option value="default">Sort: Featured</option>
+          <option value="low">Price: Low to high</option>
+          <option value="high">Price: High to low</option>
+        </select>
+      </div>
+      <div class="filter-row">
+        <button class="filter active" onclick="filterCategory('All')">All</button>
+        <button class="filter" onclick="filterCategory('Lighting')">Lighting</button>
+        <button class="filter" onclick="filterCategory('Wiring')">Wiring</button>
+        <button class="filter" onclick="filterCategory('Accessories')">Accessories</button>
+        <button class="filter" onclick="filterCategory('Protection')">Protection</button>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section class="wholesale-banner container">
+      <div><span class="eyebrow">FOR BULK BUYERS</span><h2>Buying for a big project?</h2><p>Explore our wholesale enquiry experience for contractors, retailers and businesses.</p></div>
+      <button class="primary-button" onclick="showPage('wholesale')">Wholesale enquiries →</button>
+    </section>
+  </main>
+
+  <main id="cartPage" class="page hidden container inner-page">
+    <button class="back-link" onclick="showPage('home')">← Continue shopping</button>
+    <h1>Shopping cart</h1>
+    <div class="cart-layout">
+      <section class="panel"><div id="cartItems"></div></section>
+      <aside class="panel summary-panel">
+        <h3>Order summary</h3>
+        <div class="summary-line"><span>Subtotal</span><b id="cartSubtotal">₦0</b></div>
+        <div class="summary-line"><span>Delivery</span><span>Calculated at checkout</span></div>
+        <div class="summary-total"><span>Total</span><strong id="cartTotal">₦0</strong></div>
+        <button class="primary-button full" id="checkoutButton" onclick="startCheckout()">Proceed to checkout</button>
+      </aside>
+    </div>
+  </main>
+
+  <main id="checkoutPage" class="page hidden container inner-page">
+    <button class="back-link" onclick="showPage('cart')">← Back to cart</button>
+    <h1>Checkout</h1>
+    <div class="checkout-steps">
+      <span class="step active" id="step1Label">1. Delivery details</span>
+      <span class="step" id="step2Label">2. Delivery method</span>
+      <span class="step" id="step3Label">3. Payment</span>
+    </div>
+
+    <div class="checkout-layout">
+      <section class="panel checkout-form">
+        <div id="checkoutStep1">
+          <h2>Delivery information</h2>
+          <p class="muted">Enter the details for this demo order.</p>
+          <form id="customerForm">
+            <label>Full name<input id="customerName" required placeholder="Your full name"></label>
+            <label>Email address<input id="customerEmail" type="email" required placeholder="you@example.com"></label>
+            <label>Phone number<input id="customerPhone" type="tel" required placeholder="080XXXXXXXX"></label>
+            <label>Delivery address<textarea id="customerAddress" required placeholder="House number, street and area"></textarea></label>
+            <label>State
+              <select id="customerState" required>
+                <option value="">Select state</option>
+                <option>Lagos</option><option>Abuja</option><option>Rivers</option>
+                <option>Oyo</option><option>Osun</option><option>Ogun</option>
+                <option>Kano</option><option>Enugu</option><option>Other</option>
+              </select>
+            </label>
+            <button class="primary-button full" type="submit">Continue to delivery</button>
+          </form>
+        </div>
+
+        <div id="checkoutStep2" class="hidden">
+          <h2>Choose delivery method</h2>
+          <p class="muted">Select a sample delivery option.</p>
+          <label class="choice-card"><input type="radio" name="delivery" value="Standard delivery" checked><span><b>Standard delivery</b><small>Estimated 3–5 business days</small></span><strong>₦2,500</strong></label>
+          <label class="choice-card"><input type="radio" name="delivery" value="Express delivery"><span><b>Express delivery</b><small>Estimated 1–2 business days</small></span><strong>₦5,000</strong></label>
+          <div class="button-row"><button class="secondary-button" onclick="checkoutStep(1)">Back</button><button class="primary-button" onclick="checkoutStep(3)">Continue to payment</button></div>
+        </div>
+
+        <div id="checkoutStep3" class="hidden">
+          <h2>Payment method</h2>
+          <p class="muted">This is a visual demo. No payment will be collected.</p>
+          <label class="choice-card"><input type="radio" name="payment" value="Pay on delivery" checked><span><b>Pay on delivery</b><small>Demo selection only</small></span><strong>📦</strong></label>
+          <label class="choice-card"><input type="radio" name="payment" value="Card payment"><span><b>Card payment</b><small>Illustrative option only — no card details requested</small></span><strong>💳</strong></label>
+          <label class="choice-card"><input type="radio" name="payment" value="Bank transfer"><span><b>Bank transfer</b><small>Illustrative option only</small></span><strong>🏦</strong></label>
+          <div class="demo-notice">Demo checkout: clicking Place demo order will not create a real order or charge you.</div>
+          <div class="button-row"><button class="secondary-button" onclick="checkoutStep(2)">Back</button><button class="primary-button" onclick="placeDemoOrder()">Place demo order</button></div>
+        </div>
+      </section>
+
+      <aside class="panel summary-panel">
+        <h3>Your order</h3>
+        <div id="checkoutSummaryItems"></div>
+        <div class="summary-line"><span>Subtotal</span><b id="checkoutSubtotal">₦0</b></div>
+        <div class="summary-line"><span>Delivery</span><b id="deliveryCost">₦2,500</b></div>
+        <div class="summary-total"><span>Total</span><strong id="checkoutTotal">₦0</strong></div>
+      </aside>
+    </div>
+  </main>
+
+  <main id="successPage" class="page hidden container inner-page">
+    <section class="success-panel panel">
+      <div class="success-icon">✓</div>
+      <span class="eyebrow">DEMO COMPLETE</span>
+      <h1>Order experience completed!</h1>
+      <p>This is a demonstration only. No real order was submitted and no payment was processed.</p>
+      <div class="order-reference" id="orderReference"></div>
+      <button class="primary-button" onclick="resetStore()">Continue shopping</button>
+    </section>
+  </main>
+
+  <main id="wholesalePage" class="page hidden container inner-page">
+    <button class="back-link" onclick="showPage('home')">← Back to store</button>
+    <section class="wholesale-panel panel">
+      <span class="eyebrow">VOLTEDGE WHOLESALE</span>
+      <h1>Electrical supplies for bigger projects.</h1>
+      <p>Explore the wholesale enquiry experience for contractors, electricians, retailers and businesses.</p>
+      <form id="wholesaleForm">
+        <label>Business or contact name<input required placeholder="Your name or business"></label>
+        <label>Phone number<input required type="tel" placeholder="080XXXXXXXX"></label>
+        <label>Products required<textarea required placeholder="Tell us what products you need and the quantities"></textarea></label>
+        <button class="primary-button full" type="submit">Preview enquiry confirmation</button>
+      </form>
+      <p class="muted small">Demo only. This form does not send your details anywhere.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div><a class="logo footer-logo" href="#" onclick="showPage('home')"><span class="logo-icon">V</span><span>Volt<span>Edge</span><small>ELECTRICALS</small></span></a><p>Your electrical shopping destination.</p></div>
+      <div><b>Shop</b><a href="#" onclick="filterCategory('Lighting')">Lighting</a><a href="#" onclick="filterCategory('Wiring')">Wiring & cables</a><a href="#" onclick="filterCategory('Accessories')">Accessories</a></div>
+      <div><b>Information</b><a href="#" onclick="showPage('wholesale')">Wholesale enquiries</a><a href="#" onclick="showPage('cart')">Shopping cart</a></div>
+    </div>
+    <div class="copyright">© 2026 VoltEdge Electricals. Concept storefront demonstration.</div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
